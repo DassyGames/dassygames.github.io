@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b1020">
+    <title>ClassSpin — Крутилка для уроков</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="brand">
+            <div class="brand-icon">✦</div>
+            <div>
+                <h1>Class<span>Spin</span></h1>
+                <p>SMART CLASSROOM TOOL</p>
+            </div>
+        </div>
+
+        <div class="header-right">
+            <div class="status">
+                <span class="status-dot"></span>
+                Система готова
+            </div>
+            <button class="icon-btn" id="soundToggle" title="Звук">🔊</button>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <section class="intro">
+            <div>
+                <div class="eyebrow">INTERACTIVE CLASSROOM</div>
+                <h2>Кто сегодня <span>отвечает?</span></h2>
+                <p>Крути колесо, выбирай ученика и проверяй знания!</p>
+            </div>
+
+            <div class="round-info">
+                <span>ТЕКУЩИЙ РАУНД</span>
+                <strong id="roundNumber">01</strong>
+            </div>
+        </section>
+
+        <div class="dashboard">
+
+            <!-- LEFT: WHEEL -->
+            <section class="wheel-section">
+
+                <div class="section-heading">
+                    <div>
+                        <h3>Колесо выбора</h3>
+                        <p>Случайный выбор ученика</p>
+                    </div>
+                    <div class="live-badge">
+                        <span></span> LIVE
+                    </div>
+                </div>
+
+                <div class="wheel-container" id="wheelContainer">
+
+                    <div class="wheel-pointer"></div>
+
+                    <canvas id="wheelCanvas" width="700" height="700">
+                        Ваш браузер не поддерживает Canvas.
+                    </canvas>
+
+                    <div class="wheel-center">
+                        <div class="center-star">✦</div>
+                        <span>CLASS</span>
+                        <strong>SPIN</strong>
+                    </div>
+
+                </div>
+
+                <div class="wheel-counter">
+                    <span>Участников: <strong id="totalCount">30</strong></span>
+                    <span class="counter-divider"></span>
+                    <span>Осталось: <strong id="remainingCount">30</strong></span>
+                </div>
+
+                <button class="spin-button" id="spinButton">
+                    <span class="spin-icon">⟳</span>
+                    <span>КРУТИТЬ КОЛЕСО</span>
+                    <span class="spin-arrow">→</span>
+                </button>
+
+                <button class="reset-round" id="resetButton">
+                    ↻ Начать новый раунд
+                </button>
+
+            </section>
+
+            <!-- RIGHT: RESULTS -->
+            <section class="result-section">
+
+                <div class="section-heading">
+                    <div>
+                        <h3>Результат выбора</h3>
+                        <p>Ваш сегодняшний участник</p>
+                    </div>
+                    <div class="result-icon">🏆</div>
+                </div>
+
+                <div class="student-card" id="studentCard">
+                    <div class="card-top">
+                        <span class="card-label">SELECTED STUDENT</span>
+                        <span class="card-star">✦</span>
+                    </div>
+
+                    <div class="student-avatar" id="studentAvatar">?</div>
+
+                    <div class="student-placeholder" id="studentName">
+                        Ожидание выбора
+                    </div>
+
+                    <div class="student-subtitle" id="studentSubtitle">
+                        Нажмите кнопку вращения
+                    </div>
+                </div>
+
+                <!-- QUESTION -->
+                <div class="question-card">
+                    <div class="question-header">
+                        <div class="question-symbol">?</div>
+                        <div>
+                            <h3>Вопрос ученику</h3>
+                            <p>Автоматически выбранный вопрос</p>
+                        </div>
+                    </div>
+
+                    <div class="question-content" id="questionContent">
+                        <span class="question-empty">
+                            Здесь появится вопрос после выбора ученика.
+                        </span>
+                    </div>
+
+                    <div class="question-footer">
+                        <span id="questionNumber">ВОПРОС НЕ ВЫБРАН</span>
+                        <button id="nextQuestionButton" disabled>
+                            Другой вопрос ↻
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STATISTICS -->
+                <div class="statistics">
+                    <div class="stat-item">
+                        <span class="stat-icon purple">♙</span>
+                        <div>
+                            <strong id="selectedCount">0</strong>
+                            <span>Выбрано</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-item">
+                        <span class="stat-icon blue">◷</span>
+                        <div>
+                            <strong id="leftCount">30</strong>
+                            <span>Осталось</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-item">
+                        <span class="stat-icon green">✓</span>
+                        <div>
+                            <strong id="progressPercent">0%</strong>
+                            <span>Прогресс</span>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+
+        <!-- MANAGEMENT -->
+        <section class="management">
+
+            <div class="management-heading">
+                <div>
+                    <div class="eyebrow">CLASS MANAGEMENT</div>
+                    <h2>Управление классом</h2>
+                    <p>Добавляйте учеников и редактируйте вопросы.</p>
+                </div>
+            </div>
+
+            <div class="management-grid">
+
+                
+                <!-- STUDENTS -->
+                <div class="management-card">
+
+                    <div class="management-title">
+                        <div class="management-icon purple-bg">♙</div>
+                        <div>
+                            <h3>Ученики</h3>
+                            <p id="studentListCount">30 учеников</p>
+                        </div>
+                    </div>
+
+                    <div class="question-editor">
+                        <textarea
+                            id="studentsInput"
+                            placeholder="Каждого ученика вводите с новой строки..."
+                            spellcheck="false"
+                        ></textarea>
+
+                        <div class="editor-footer">
+                            <span>Одно имя = одна строка</span>
+                            <button id="saveStudentsButton">
+                                Сохранить учеников
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- QUESTIONS -->
+                <div class="management-card">
+
+                    <div class="management-title">
+                        <div class="management-icon blue-bg">?</div>
+                        <div>
+                            <h3>Банк вопросов</h3>
+                            <p id="questionListCount">Вопросы для урока</p>
+                        </div>
+                    </div>
+
+                    <div class="question-editor">
+                        <textarea
+                            id="questionsInput"
+                            placeholder="Каждый вопрос вводите с новой строки..."
+                            spellcheck="false"
+                        ></textarea>
+
+                        <div class="editor-footer">
+                            <span>Один вопрос = одна строка</span>
+                            <button id="saveQuestionsButton">
+                                Сохранить вопросы
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <footer class="footer">
+            <span>✦ ClassSpin</span>
+            <span>Made for better learning · 2026</span>
+        </footer>
+
+    </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
