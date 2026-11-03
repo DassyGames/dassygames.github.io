@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101827">
+  <title>Мир букв — Найди правильную букву</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <a class="back-link" href="../index.html">← На главную</a>
+      <div class="brand"><span class="brand-icon">🔤</span><span>МИР БУКВ</span></div>
+      <div class="sound-wrap">
+        <button id="soundBtn" class="icon-btn" aria-label="Звук" title="Включить или выключить звук">🔊</button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="eyebrow">ИГРА ДЛЯ НАЧАЛЬНЫХ КЛАССОВ</div>
+      <h1>Найди правильную <span>букву!</span></h1>
+      <p>Посмотри на картинку и выбери букву, с которой начинается слово.</p>
+    </section>
+
+    <section class="game-card" aria-live="polite">
+      <div class="game-meta">
+        <div class="progress-label"><span>ТВОЙ ПРОГРЕСС</span><strong id="progressText">Вопрос 1 из 10</strong></div>
+        <div class="progress-track"><div id="progressBar" class="progress-fill"></div></div>
+        <div class="stats">
+          <div class="stat"><span>⭐</span><div><strong id="score">0</strong><small>Очки</small></div></div>
+          <div class="stat"><span>🎯</span><div><strong id="accuracy">—</strong><small>Точность</small></div></div>
+          <div class="stat"><span>🔥</span><div><strong id="streak">0</strong><small>Подряд</small></div></div>
+        </div>
+      </div>
+
+      <div class="question-area">
+        <div class="instruction">КАКАЯ БУКВА ПЕРВАЯ?</div>
+        <div class="picture" id="picture" role="img" aria-label="Картинка">🍎</div>
+        <h2 id="word">Арбуз</h2>
+        <p class="hint">Выбери правильную букву</p>
+        <div id="answers" class="answers">
+          <button class="answer">А</button><button class="answer">О</button>
+          <button class="answer">И</button><button class="answer">У</button>
+        </div>
+        <div id="feedback" class="feedback" aria-live="assertive"> </div>
+        <button id="nextBtn" class="next-btn" disabled>Следующий вопрос <span>→</span></button>
+      </div>
+    </section>
+
+    <footer>Учись, играй и открывай мир букв! <span>✦</span></footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
